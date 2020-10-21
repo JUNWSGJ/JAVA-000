@@ -1,4 +1,6 @@
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 public class MyClassLoader extends ClassLoader{
 
@@ -51,14 +53,12 @@ public class MyClassLoader extends ClassLoader{
     MyClassLoader classLoader = new MyClassLoader();
     try{
       Class clazz = classLoader.findClass("Hello.xlass");
-      System.out.println("成功加载到类" + clazz.getName());
+      Constructor con = clazz.getDeclaredConstructor();
+      Method method = clazz.getDeclaredMethod("hello");
+      method.invoke(con.newInstance());
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-
-//    classLoader.findClass()
-
 
   }
 
